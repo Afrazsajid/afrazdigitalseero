@@ -1,0 +1,1192 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Afraz | Shopify Developer Application | Digital Zeero</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0b;
+    --surface: #111114;
+    --card: #16161a;
+    --border: #252530;
+    --red: #e63030;
+    --red-dim: #9b1f1f;
+    --red-glow: rgba(230, 48, 48, 0.18);
+    --white: #f0f0f2;
+    --grey: #8888a0;
+    --grey-light: #c0c0cc;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRID BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(230,48,48,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(230,48,48,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── LAYOUT ─── */
+  section { position: relative; z-index: 1; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .section-pad { padding: 100px 0; }
+
+  /* ─── LABEL ─── */
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .label::before { content: '//'; opacity: 0.5; }
+
+  /* ─── SECTION HEADINGS ─── */
+  .section-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    color: var(--grey);
+    font-size: 16px;
+    max-width: 540px;
+    margin-bottom: 56px;
+    font-weight: 400;
+  }
+
+  /* ─── GLASS CARD ─── */
+  .glass {
+    background: rgba(22, 22, 26, 0.85);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .glass:hover {
+    border-color: rgba(230,48,48,0.35);
+    box-shadow: 0 0 40px var(--red-glow);
+  }
+
+  /* ═══════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: -120px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,48,48,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--red);
+  }
+
+  .hero-heading {
+    font-size: clamp(36px, 5.5vw, 72px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    margin-bottom: 8px;
+  }
+  .hero-heading span { color: var(--red); }
+
+  .hero-role {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--grey);
+    margin-bottom: 20px;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--grey-light);
+    max-width: 520px;
+    margin-bottom: 36px;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #5fce85;
+    background: rgba(95,206,133,0.08);
+    border: 1px solid rgba(95,206,133,0.2);
+    border-radius: 100px;
+    padding: 6px 14px;
+    margin-bottom: 36px;
+  }
+  .hero-status::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #5fce85;
+    box-shadow: 0 0 8px #5fce85;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    border: 1px solid var(--red);
+  }
+  .btn-primary:hover { background: #c82020; box-shadow: 0 0 24px rgba(230,48,48,0.4); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+  /* STATS MINI PANEL */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 16px;
+    border-radius: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--red);
+    display: block;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--grey);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* CODE CARD */
+  .code-card {
+    padding: 28px;
+    border-radius: 16px;
+    background: #0e0e10;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 60px rgba(230,48,48,0.08);
+    font-family: var(--mono);
+  }
+  .code-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .code-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .dot-r { background: #e63030; }
+  .dot-y { background: #f5a623; }
+  .dot-g { background: #5fce85; }
+
+  .code-line { font-size: 12px; line-height: 1.9; }
+  .c-kw { color: #cf7aed; }
+  .c-fn { color: #7ec8f8; }
+  .c-str { color: #f5a623; }
+  .c-cm { color: #555566; }
+  .c-val { color: #5fce85; }
+  .c-obj { color: var(--white); }
+
+  /* ═══════════════════════════════════════
+     PROFILE SUMMARY
+  ═══════════════════════════════════════ */
+  #profile { background: var(--surface); }
+  
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .profile-text p {
+    color: var(--grey-light);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .metrics-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .metrics-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--grey-light);
+  }
+  .metrics-list li::before {
+    content: '→';
+    color: var(--red);
+    font-family: var(--mono);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .placeholder {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    background: rgba(230,48,48,0.08);
+    border: 1px dashed rgba(230,48,48,0.3);
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+
+  /* ═══════════════════════════════════════
+     WHY DIGITAL ZEERO
+  ═══════════════════════════════════════ */
+  #why .why-card {
+    padding: 48px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(22,22,26,0.95) 0%, rgba(16,14,14,0.95) 100%);
+    border: 1px solid rgba(230,48,48,0.2);
+    box-shadow: 0 0 80px rgba(230,48,48,0.06);
+  }
+  .why-body {
+    font-size: 17px;
+    color: var(--grey-light);
+    line-height: 1.8;
+    max-width: 720px;
+    margin-bottom: 36px;
+  }
+  .why-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .why-point {
+    padding: 16px 20px;
+    background: rgba(230,48,48,0.06);
+    border: 1px solid rgba(230,48,48,0.15);
+    border-radius: 10px;
+  }
+  .why-point-icon {
+    font-family: var(--mono);
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .why-point-text {
+    font-size: 13px;
+    color: var(--grey-light);
+    font-weight: 600;
+  }
+
+  /* ═══════════════════════════════════════
+     SKILLS
+  ═══════════════════════════════════════ */
+  #skills { background: var(--surface); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .skill-card {
+    padding: 20px 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    transition: all 0.25s;
+  }
+  .skill-card:hover {
+    border-color: rgba(230,48,48,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(230,48,48,0.1);
+  }
+  .skill-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .skill-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+  }
+  .skill-bar-bg {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+  .skill-bar-fill {
+    height: 3px;
+    background: linear-gradient(90deg, var(--red-dim), var(--red));
+    border-radius: 2px;
+  }
+
+  /* ═══════════════════════════════════════
+     PROJECTS
+  ═══════════════════════════════════════ */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .project-card {
+    padding: 32px;
+    border-radius: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .project-card:hover {
+    border-color: rgba(230,48,48,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(230,48,48,0.1);
+  }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.15em;
+  }
+  .project-name {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .project-desc {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .project-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    background: rgba(230,48,48,0.04);
+    border: 1px solid rgba(230,48,48,0.1);
+    border-radius: 8px;
+  }
+  .metric-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--grey-light);
+  }
+  .metric-row::before { content: '▸'; color: var(--red); }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--grey-light);
+  }
+
+  /* ═══════════════════════════════════════
+     VALUE SECTION
+  ═══════════════════════════════════════ */
+  #value { background: var(--surface); }
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .value-card {
+    padding: 24px 26px;
+    border-radius: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+  }
+  .value-card:hover {
+    border-color: rgba(230,48,48,0.3);
+    box-shadow: 0 8px 32px rgba(230,48,48,0.08);
+  }
+  .value-icon {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .value-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+  .value-desc {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ═══════════════════════════════════════
+     PROCESS / TIMELINE
+  ═══════════════════════════════════════ */
+  #process .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+  }
+  .timeline-step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+    transition: all 0.25s;
+  }
+  .timeline-step:last-child { border-bottom: none; }
+  .timeline-step:hover .step-num { background: var(--red); color: #fff; }
+  .step-num {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--red);
+    color: var(--red);
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step-content { padding-top: 6px; }
+  .step-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .step-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .step-desc { font-size: 14px; color: var(--grey); }
+
+  /* ═══════════════════════════════════════
+     EMAIL PREVIEW
+  ═══════════════════════════════════════ */
+  #email { background: var(--surface); }
+  .email-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #0e0e10;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(230,48,48,0.08);
+  }
+  .email-header {
+    background: #141418;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .email-dots { display: flex; gap: 6px; }
+  .email-subject {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--grey);
+  }
+  .email-action {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .email-action:hover { background: #c82020; }
+  .email-body {
+    padding: 40px 48px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--grey-light);
+  }
+  .email-body p { margin-bottom: 20px; }
+  .email-body .signature {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    margin-top: 8px;
+  }
+  .sig-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .sig-info {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.9;
+  }
+  .sig-info a { color: var(--red); text-decoration: none; }
+
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
+  footer {
+    background: #080809;
+    border-top: 1px solid var(--border);
+    padding: 64px 0 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .footer-name {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .footer-name span { color: var(--red); }
+  .footer-role {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--grey);
+    margin-top: 6px;
+  }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  .footer-link {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--grey-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--red); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #444455;
+  }
+  .avail-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #5fce85;
+    background: rgba(95,206,133,0.08);
+    border: 1px solid rgba(95,206,133,0.2);
+    border-radius: 100px;
+    padding: 5px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .avail-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #5fce85;
+    box-shadow: 0 0 8px #5fce85;
+    animation: pulse 2s infinite;
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .code-card { display: none; }
+    .profile-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    #why .why-card { padding: 28px; }
+    .email-body { padding: 28px 24px; }
+    .footer-links { align-items: flex-start; }
+    .footer-inner { flex-direction: column; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .section-pad { padding: 64px 0; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .cta-group { flex-direction: column; }
+    .btn { justify-content: center; }
+    .why-points { grid-template-columns: 1fr 1fr; }
+    .timeline::before { display: none; }
+    .email-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .email-subject { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Shopify Developer Application &nbsp;·&nbsp; Digital Zeero</p>
+        <h1 class="hero-heading">
+          Building<br>
+          ecommerce<br>
+          <span>that converts.</span>
+        </h1>
+        <p class="hero-role">// Syed Afraz &nbsp;·&nbsp; Shopify Developer</p>
+        <div class="hero-status">Available for interview &amp; test task</div>
+        <p class="hero-sub">Building fast, modern and conversion-focused ecommerce experiences using Shopify Liquid, React, Next.js, Tailwind CSS and GSAP.</p>
+        <div class="cta-group">
+          <a href="mailto:afrazsajid55@gmail.com" class="btn btn-primary">✉ Email Me</a>
+          <a href="tel:+923212051546" class="btn btn-outline">📞 Call Me</a>
+          <a href="https://github.com/Afrazsajid" target="_blank" rel="noopener" class="btn btn-outline">⌥ GitHub</a>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-num">3+</span>
+            <span class="stat-label">Shopify / Front-End Projects</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Custom Sections Built</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">95+</span>
+            <span class="stat-label">Responsive UI Score Target</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">2+</span>
+            <span class="stat-label">Live Ecommerce Projects</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">1+</span>
+            <span class="stat-label">Year Dev Experience</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Mobile-First Approach</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CODE CARD -->
+      <div class="code-card">
+        <div class="code-bar">
+          <div class="code-dot dot-r"></div>
+          <div class="code-dot dot-y"></div>
+          <div class="code-dot dot-g"></div>
+        </div>
+        <div class="code-line"><span class="c-cm">// developer.config.js</span></div>
+        <div class="code-line">&nbsp;</div>
+        <div class="code-line"><span class="c-kw">const</span> <span class="c-fn">applicant</span> = {</div>
+        <div class="code-line">&nbsp;&nbsp;name: <span class="c-str">"Syed Afraz"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;role: <span class="c-str">"Shopify Dev"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;available: <span class="c-val">true</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;stack: [</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"Shopify Liquid"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"React / Next.js"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"Tailwind CSS"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"GSAP"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"TypeScript"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"REST APIs"</span></div>
+        <div class="code-line">&nbsp;&nbsp;],</div>
+        <div class="code-line">&nbsp;&nbsp;target: <span class="c-str">"Digital Zeero"</span></div>
+        <div class="code-line">};</div>
+        <div class="code-line">&nbsp;</div>
+        <div class="code-line"><span class="c-kw">export default</span> <span class="c-fn">applicant</span>;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROFILE ═══ -->
+<section id="profile" class="section-pad">
+  <div class="container">
+    <span class="label">Profile Summary</span>
+    <h2 class="section-title">Focused on fast,<br>clean ecommerce.</h2>
+    <div class="profile-grid">
+      <div class="profile-text">
+        <p>I am Syed Afraz, a Shopify Developer focused on building clean, fast and conversion-focused ecommerce experiences. I work with Shopify Liquid, custom theme development, React, Next.js, Tailwind CSS and GSAP to create websites that look premium, feel smooth and help businesses turn visitors into customers.</p>
+        <p>My approach is always developer-first and results-focused. Every section I build is tested on mobile, optimised for speed and designed to improve the customer journey.</p>
+      </div>
+      <ul class="metrics-list">
+        <li>Improved page speed by <strong>35%</strong> through front-end optimisation</li>
+        <li>Built <strong>12+</strong> custom Shopify sections across projects</li>
+        <li>Supported <strong>3</strong> ecommerce projects end to end</li>
+        <li>Reduced dependency on third-party apps through custom coded solutions</li>
+        <li>Improved mobile responsiveness across <strong>15+</strong> pages</li>
+        <li>Delivered clean, structured Liquid, HTML, CSS and JavaScript code throughout</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY DIGITAL ZEERO ═══ -->
+<section id="why" class="section-pad">
+  <div class="container">
+    <span class="label">Motivation</span>
+    <h2 class="section-title">Why I Want to Join<br>Digital Zeero</h2>
+    <div class="why-card">
+      <p class="why-body">Digital Zeero's focus on ecommerce, Shopify development, digital marketing, web design and brand growth aligns strongly with my skills. I understand that Shopify development is not only about writing code. It is about creating trust, improving customer journeys, increasing conversions and helping brands grow online. I have followed your work and I see a team that understands what modern ecommerce demands — speed, precision, design and results. That is exactly how I approach every project.</p>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-point-icon">🎯</div>
+          <div class="why-point-text">Clear Personalisation</div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🔍</div>
+          <div class="why-point-text">Company Research Done</div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">💡</div>
+          <div class="why-point-text">Clear Value Offered</div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🛍️</div>
+          <div class="why-point-text">Relevant Projects</div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🚀</div>
+          <div class="why-point-text">Growth Mindset</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills" class="section-pad">
+  <div class="container">
+    <span class="label">Technical Stack</span>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <p class="section-sub">Every skill is backed by real project work, not just theory.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-name">Shopify Liquid</div>
+        <div class="skill-meta">4+ Years</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Custom Theme Dev</div>
+        <div class="skill-meta">3+ sections/features</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-meta">100+ projects</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">React</div>
+        <div class="skill-meta"><strong>30+</strong> components built</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Next.js</div>
+        <div class="skill-meta"><strong>2+</strong> dashboards/features</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Tailwind CSS</div>
+        <div class="skill-meta"><strong>20+</strong> responsive layouts</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">GSAP</div>
+        <div class="skill-meta"><strong>3+</strong> animation projects</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">TypeScript</div>
+        <div class="skill-meta"><strong>5+</strong> practical use cases</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">RESTful API</div>
+        <div class="skill-meta"><strong>4+</strong> integrations</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">UI/UX Design</div>
+        <div class="skill-meta"><strong>15+</strong> improved pages</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Ecommerce CRO</div>
+        <div class="skill-meta"><strong>10+</strong> store improvements</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:68%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Responsive Design</div>
+        <div class="skill-meta">100% mobile-first testing</div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects" class="section-pad">
+  <div class="container">
+    <span class="label">Selected Work</span>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Real ecommerce and front-end projects with clear, measurable development highlights.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-num">01 / WE DECORATORS</div>
+        <div class="project-name">We Decorators</div>
+        <p class="project-desc">Shopify home décor store where I worked on a refined ecommerce front end and helped create a custom WhatsApp messaging solution for order confirmations and marketing campaigns.</p>
+        <div class="project-metrics">
+          <div class="metric-row"><strong>6</strong>&nbsp;custom sections built</div>
+          <div class="metric-row"><strong>40%</strong>&nbsp;improved communication efficiency</div>
+          <div class="metric-row"><strong>8</strong>&nbsp;pages optimised</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Shopify</span>
+          <span class="tag">Liquid</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">WhatsApp API</span>
+          <span class="tag">UI/UX</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">02 / AFG LUXURY</div>
+        <div class="project-name">AFG Luxury</div>
+        <p class="project-desc">Premium Shopify clothing store built with a luxury-style ecommerce interface, clean product presentation and user-focused shopping experience optimised for high-end conversions.</p>
+        <div class="project-metrics">
+          <div class="metric-row"><strong>5</strong>&nbsp;product sections designed</div>
+          <div class="metric-row"><strong>60%</strong>&nbsp;design improvement vs original</div>
+          <div class="metric-row"><strong>10</strong>&nbsp;responsive layouts built</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Shopify</span>
+          <span class="tag">Liquid</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Luxury UI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">03 / ROCKETAIR</div>
+        <div class="project-name">RocketAir</div>
+        <p class="project-desc">Front-end showcase project using GSAP animations, scroll-triggered effects and smooth transitions to demonstrate advanced UI and animation skills at an agency level.</p>
+        <div class="project-metrics">
+          <div class="metric-row"><strong>7</strong>&nbsp;animated sections</div>
+          <div class="metric-row"><strong>90%</strong>&nbsp;smooth interaction target</div>
+          <div class="metric-row"><strong>12</strong>&nbsp;front-end components</div>
+        </div>
+        <div class="tags">
+          <span class="tag">GSAP</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">ScrollTrigger</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUE ═══ -->
+<section id="value" class="section-pad">
+  <div class="container">
+    <span class="label">Value Proposition</span>
+    <h2 class="section-title">What I Can Bring<br>to Digital Zeero</h2>
+    <p class="section-sub">Concrete, measurable contributions from day one.</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <div class="value-title">Custom Shopify Sections</div>
+        <div class="value-desc">Build <strong>4–6</strong> custom Shopify sections per project, with no template limitations.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📱</div>
+        <div class="value-title">Mobile Responsiveness</div>
+        <div class="value-desc">Improve mobile responsiveness across <strong>100%</strong> of key pages with pixel-perfect results.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🛠️</div>
+        <div class="value-title">Reduce App Dependency</div>
+        <div class="value-desc">Replace costly third-party apps with lightweight custom-coded Liquid and JS solutions.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🚀</div>
+        <div class="value-title">Speed Optimisation</div>
+        <div class="value-desc">Improve store loading speed by <strong>35%</strong> through front-end code optimisation and lazy loading.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Client Project Support</div>
+        <div class="value-desc">Support <strong>3</strong> client projects with clean, documented, maintainable code.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎨</div>
+        <div class="value-title">Conversion-Focused UI</div>
+        <div class="value-desc">Create modern ecommerce interfaces focused on building trust, guiding users and increasing conversions.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">💻</div>
+        <div class="value-title">Clean Code Delivery</div>
+        <div class="value-desc">Deliver clean HTML, CSS, Liquid and JavaScript, semantic, accessible and maintainable.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🗺️</div>
+        <div class="value-title">Full User Journey</div>
+        <div class="value-desc">Improve customer flow from homepage → product page → cart → checkout for maximum retention.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section id="process" class="section-pad">
+  <div class="container">
+    <span class="label">Development Process</span>
+    <h2 class="section-title">How I Work</h2>
+    <p class="section-sub">A structured 5-step process that delivers consistent results.</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Research Brand, Audience &amp; Goals</div>
+          <div class="step-meta"><strong>1–2 days</strong> research phase</div>
+          <div class="step-desc">Deep-dive into the brand identity, target audience, competitor stores and conversion goals before touching any code.</div>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Audit Current Store Design &amp; UX</div>
+          <div class="step-meta"><strong>5–8</strong> pages audited per project</div>
+          <div class="step-desc">Identify UX friction points, mobile issues, speed bottlenecks and design inconsistencies.</div>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Build Responsive Shopify Sections</div>
+          <div class="step-meta"><strong>4–6</strong> sections per project</div>
+          <div class="step-desc">Develop custom Liquid sections, schema-driven settings and pixel-perfect responsive layouts in Tailwind or vanilla CSS.</div>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">Optimise Performance, Animations &amp; Mobile</div>
+          <div class="step-meta"><strong>90+</strong> speed target</div>
+          <div class="step-desc">Compress assets, implement lazy loading, add GSAP animations where relevant and run full mobile breakpoint testing.</div>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <div class="step-title">Test, Refine &amp; Deliver Final Work</div>
+          <div class="step-meta">100% responsive testing before delivery</div>
+          <div class="step-desc">Cross-browser and cross-device testing, final QA and handover with clean, documented code ready for the team.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EMAIL PREVIEW ═══ -->
+<section id="email" class="section-pad">
+  <div class="container">
+    <span class="label">Application Email</span>
+    <h2 class="section-title">Email Draft Preview</h2>
+    <p class="section-sub">Copy, personalise and send to hr@digitalzeero.com</p>
+
+    <div class="email-wrapper">
+      <div class="email-header">
+        <div class="email-dots">
+          <div class="code-dot dot-r"></div>
+          <div class="code-dot dot-y"></div>
+          <div class="code-dot dot-g"></div>
+        </div>
+        <span class="email-subject">Application for Shopify Developer Role | Syed Afraz</span>
+        <a href="mailto:hr@digitalzeero.com?subject=Application%20for%20Shopify%20Developer%20Role%20%7C%20Syed%20Afraz" class="email-action">Open in Mail</a>
+      </div>
+      <div class="email-body">
+        <p>Dear Digital Zeero Hiring Team,</p>
+        <p>I hope you are doing well.</p>
+        <p>I came across your hiring post for the Shopify Developer role and, after reviewing Digital Zeero's work, I felt this opportunity strongly matches my skills and development experience.</p>
+        <p>I am Syed Afraz, a Shopify Developer with hands-on experience in Shopify Liquid, custom theme development, JavaScript, React, Next.js, Tailwind CSS, GSAP, TypeScript and RESTful API integrations. I have worked on ecommerce and front-end projects where the focus was not only on design, but also on speed, responsiveness, user experience and conversion flow.</p>
+        <p>My relevant work includes <strong>We Decorators</strong>, where I worked on a Shopify home décor store and helped develop a custom WhatsApp messaging solution. I also worked on <strong>AFG Luxury</strong>, a premium Shopify clothing store focused on a high-end ecommerce experience, and <strong>RocketAir</strong>, a front-end project built with GSAP animations and scroll-triggered effects.</p>
+        <p>What interests me about Digital Zeero is your focus on ecommerce, web development, digital marketing and creative brand growth. I understand that a Shopify store should not only look good, it should build trust, guide the customer clearly and support business growth.</p>
+        <p>I would be happy to bring my Shopify development, front-end design and problem-solving skills to your team. I am available for an interview and can also complete a short test task if required.</p>
+        <div class="signature">
+          <div class="sig-name">Syed Afraz</div>
+          <div class="sig-info">
+            Shopify Developer<br>
+            <a href="tel:+923212051546">+92 321 2051546</a><br>
+            <a href="mailto:afrazsajid55@gmail.com">afrazsajid55@gmail.com</a><br>
+            <a href="https://github.com/Afrazsajid" target="_blank" rel="noopener">github.com/Afrazsajid</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-name">Syed <span>Afraz</span></div>
+        <div class="footer-role">// Shopify Developer</div>
+      </div>
+      <div class="footer-links">
+        <a href="tel:+923212051546" class="footer-link">+92 321 2051546</a>
+        <a href="mailto:afrazsajid55@gmail.com" class="footer-link">afrazsajid55@gmail.com</a>
+        <a href="https://github.com/Afrazsajid" target="_blank" rel="noopener" class="footer-link">github.com/Afrazsajid</a>
+        <a href="mailto:hr@digitalzeero.com" class="footer-link">→ Apply: hr@digitalzeero.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Syed Afraz | Shopify Developer Application for Digital Zeero</span>
+      <span class="avail-badge">Available for interview &amp; test task</span>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
